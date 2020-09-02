@@ -145,6 +145,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 $Payload = json_decode($Buffer->Payload);
                 if (property_exists($Payload, 'valetudo_state')) {
                     $ValetudoState = json_decode($Payload->valetudo_state);
+                    $this->SendDebug('ValetudoState', 'id: ' . $ValetudoState->id, 0);
                     $this->SetValue('VRE_State', $ValetudoState->id);
                 }
                 if (property_exists($Payload, 'cleanTime')) {
