@@ -146,7 +146,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
 
             if (fnmatch('*attributes', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
-                $this->SendDebug('Payload attributes', $Payload, 0);
+                $this->SendDebug('Payload attributes', print_r($Payload), 0);  // Debug: Payload->command
                 if (property_exists($Payload, 'valetudo_state')) {
                     #$this->SetValue('VRE_State', $Payload->state);
                 }
