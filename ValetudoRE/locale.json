@@ -1,0 +1,28 @@
+{
+    "translations": {
+        "de": {
+            "Battery level": "Akku-Ladezustand",
+            "Command": "Befehl",
+            "Clean spot": "Bereichsreinigung",
+            "Error": "Fehler",
+            "Get destinations": "Ziele auslesen",
+            "Go to": "Gehe zu",
+            "Load Map": "Karte laden",
+            "Locate": "Lokalisiere Sauger",
+            "Pause": "Pausiere",
+            "Play sound": "Ton abspielen",
+            "Reset consumable": "Verbrauchsmaterial zurücksetzen",
+            "Return to base": "Zurück zur Ladestation",
+            "Start": "Start",
+            "State": "Status",
+            "Stop": "Stop",
+            "Store Map": "Karte speichern",
+            "Segment cleanup": "Raumreinigung",
+            "Suction power": "Saugkraft",
+            "Total duration of cleanings": "Gesamtdauer der Reinigungen",
+            "Total area cleaned": "Gereinigte Gesamtfläche",
+            "Total number of cleanings": "Gesamtanzahl der Reinigungen",
+            "Zone cleanup": "Bereichsreinigung"
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "elements": [
+        { "type": "ValidationTextBox", "name": "Identifier", "caption": "Identifier" },
+        { "type": "ValidationTextBox", "name": "TopicPrefix", "caption": "Topic Prefix" }
+    ],
+    "actions": [],
+    "status": []
+}
