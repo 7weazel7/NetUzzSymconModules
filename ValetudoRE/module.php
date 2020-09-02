@@ -85,8 +85,8 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 }
             }
 
-            $this->SendDebug("Buffer->Topic", $Buffer->Topic, 0); // Debug: Buffer->Topic
-            $this->SendDebug("Buffer->Payload", $Buffer->Payload, 0); // Debug: Buffer->Payload
+            #$this->SendDebug("Buffer->Topic", $Buffer->Topic, 0); // Debug: Buffer->Topic
+            #$this->SendDebug("Buffer->Payload", $Buffer->Payload, 0); // Debug: Buffer->Payload
 
             if (fnmatch('*command_status', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
