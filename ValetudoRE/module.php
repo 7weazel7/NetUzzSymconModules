@@ -33,7 +33,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             
             
             #$this->RegisterVariableString('VRE_Error', $this->Translate('Error'), '', 10);
-            $this->RegisterVariableString('VRE_State', $this->Translate('State'), '', 30);
+            $this->RegisterVariableString('VRE_State', $this->Translate('State'), 'VRE.State', 30);
 
             $this->RegisterVariableInteger("battery_level", $this->Translate("Battery level"), "~Battery.100", 100);
             $this->RegisterVariableString('fan_speed', $this->Translate('Suction power'), '', 200);
@@ -140,15 +140,12 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                         break;
                     }
             }
-            
-            // extended debug
-            $this->SendDebug("Buffer->Topic (vor att)", $Buffer->Topic, 0); // Debug: Buffer->Topic
 
             if (fnmatch('*attributes', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
-                $this->SendDebug('Payload attributes', $Buffer->Payload, 0);  // Debug: attributes
                 if (property_exists($Payload, 'valetudo_state')) {
-                    #$this->SetValue('VRE_State', $Payload->state);
+                    $ValetudoState = json_decode($Payload->valetudo_state);
+                    $this->SetValue('VRE_State', $ValetudoState->id);
                 }
                 if (property_exists($Payload, 'cleanTime')) {
                     $this->SetValue('cleanTime', $Payload->cleanTime);
