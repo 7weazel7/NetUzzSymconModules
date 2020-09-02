@@ -144,7 +144,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             // extended debug
             $this->SendDebug("Buffer->Topic (vor att)", $Buffer->Topic, 0); // Debug: Buffer->Topic
 
-            if (fnmatch('*/attributes', $Buffer->Topic)) {
+            if (fnmatch('*attributes', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
                 $this->SendDebug('Payload attributes', $Payload, 0);
                 if (property_exists($Payload, 'valetudo_state')) {
