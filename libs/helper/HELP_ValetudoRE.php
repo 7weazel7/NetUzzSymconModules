@@ -77,9 +77,9 @@ trait HELP_ValetudoRE
         $Data['Topic'] = $this->ReadPropertyString('TopicPrefix') . '/' . $this->ReadPropertyString('Identifier') . '/' . $Topic;
         $Data['Payload'] = $Payload;
         $DataJSON = json_encode($Data, JSON_UNESCAPED_SLASHES);
-        $this->SendDebug(__FUNCTION__ . ': Publish Topic', $Data['Topic'], 0);
-        $this->SendDebug(__FUNCTION__ . ': Publish Payload', $Data['Payload'], 0);
-        $this->SendDebug(__FUNCTION__ . ': DataJSON', $DataJSON, 0);
+        #$this->SendDebug(__FUNCTION__ . ': Publish Topic', $Data['Topic'], 0);
+        #$this->SendDebug(__FUNCTION__ . ': Publish Payload', $Data['Payload'], 0);
+        #$this->SendDebug(__FUNCTION__ . ': DataJSON', $DataJSON, 0);
         $this->SendDataToParent($DataJSON);
     }
 }
