@@ -11,7 +11,7 @@ trait HELP_ValetudoRE
                 $this->SetCommand($Value);
                 break;
             case 'VRE_FanSpeeds':
-                $this->SetCommand($Value);
+                $this->SetFanSpeed($Value);
                 break;
             default:
                 $this->SendDebug('Request Action', 'No Action defined: ' . $Ident, 0);
