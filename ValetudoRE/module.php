@@ -79,7 +79,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 switch ($data->DataID) {
                     case '{7F7632D9-FA40-4F38-8DEA-C83CD4325A32}': // MQTT Server - RX (from Server to Modul)
                         $Buffer = $data;
-                        #$this->SendDebug('Buffer', print_r($Buffer, true), 0);  // Debug: Buffer
+                        $this->SendDebug('Buffer', print_r($Buffer, true), 0);  // Debug: Buffer
                         break;
                     default:
                         $this->SendDebug('Invalid Parent', KL_ERROR, 0);
@@ -87,8 +87,8 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 }
             }
 
-            #$this->SendDebug("Buffer->Topic", $Buffer->Topic, 0); // Debug: Buffer->Topic
-            #$this->SendDebug("Buffer->Payload", $Buffer->Payload, 0); // Debug: Buffer->Payload
+            $this->SendDebug("Buffer->Topic", $Buffer->Topic, 0); // Debug: Buffer->Topic
+            $this->SendDebug("Buffer->Payload", $Buffer->Payload, 0); // Debug: Buffer->Payload
 
             if (fnmatch('*command_status', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
