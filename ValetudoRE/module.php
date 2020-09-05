@@ -91,7 +91,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             if (fnmatch('*command_status', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
                 $this->SendDebug('Payload command_status', $Payload->command, 0);  // Debug: Payload->command
-                SetValue($this->GetIDForIdent('VRE_Commands'), $Payload->command);
+                #SetValue($this->GetIDForIdent('VRE_Commands'), $Payload->command);
                 switch ($Payload->command) {
                     case 'start':
                         SetValue($this->GetIDForIdent('VRE_Commands'), 1);

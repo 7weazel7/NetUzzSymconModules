@@ -16,7 +16,7 @@ trait HELP_ValetudoRE
         }
     }
 
-    public function setCommand($Value)
+    public function SetCommand($Value)
     {   
         $this->SendDebug('setValue', 'Value: ' . $Value, 0);
         switch ($Value) {
@@ -68,7 +68,7 @@ trait HELP_ValetudoRE
         }
     }
 
-    private function publishCommand(string $Topic, string $Payload)
+    private function PublishCommand(string $Topic, string $Payload)
     {
         $Data['DataID'] = '{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}';
         $Data['PacketType'] = 3;
