@@ -10,6 +10,9 @@ trait HELP_ValetudoRE
             case 'VRE_Commands':
                 $this->SetCommand($Value);
                 break;
+            case 'VRE_FanSpeeds':
+                $this->SetCommand($Value);
+                break;
             default:
                 $this->SendDebug('Request Action', 'No Action defined: ' . $Ident, 0);
                 break;
@@ -64,6 +67,31 @@ trait HELP_ValetudoRE
                 break;
             default:
                 $this->SendDebug('VRE_Commands', 'Invalid Value: ' . $Payload->command, 0);
+                break;
+        }
+    }
+
+    public function SetFanSpeed(int $Value)
+    {   
+        $this->SendDebug(__METHOD__, 'Value: ' . $Value, 0);
+        switch ($Value) {
+            case 1:
+                $this->PublishCommand("set_fan_speed", "min");
+                break;
+            case 2:
+                $this->PublishCommand("set_fan_speed", "medium");
+                break;
+            case 3:
+                $this->PublishCommand("set_fan_speed", "high");
+                break;
+            case 4:
+                $this->PublishCommand("set_fan_speed", "max");
+                break;
+            case 5:
+                $this->PublishCommand("set_fan_speed", "mop");
+                break;
+            default:
+                $this->SendDebug('VRE_FanSpeeds', 'Invalid Value: ' . $Payload->fan_speed, 0);
                 break;
         }
     }
