@@ -235,7 +235,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                     $Associations[] = [2, $this->Translate('Medium'), '', -1];
                     $Associations[] = [3, $this->Translate('High'), '', -1];
                     $Associations[] = [4, $this->Translate('Maximum'), '', -1];
-                    $Associations[] = [4, $this->Translate('Low level (wipe)'), '', -1];
+                    $Associations[] = [5, $this->Translate('Low level (wipe)'), '', -1];
                     $this->RegisterProfileIntegerEx('VRE.FanSpeeds', 'Intensity', '', '', $Associations);
                     break;
                 default:
