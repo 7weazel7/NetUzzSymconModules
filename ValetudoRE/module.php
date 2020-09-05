@@ -52,6 +52,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             // Angelgte Variablenprofile löschen
             if (IPS_VariableProfileExists("VRE.Commands")) { IPS_DeleteVariableProfile("VRE.Commands"); }
             if (IPS_VariableProfileExists("VRE.States")) { IPS_DeleteVariableProfile("VRE.States"); }
+            if (IPS_VariableProfileExists("VRE.FanSpeeds")) { IPS_DeleteVariableProfile("VRE.FanSpeeds"); }
 
         }
  
