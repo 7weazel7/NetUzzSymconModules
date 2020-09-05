@@ -1,6 +1,5 @@
 {
     "elements": [
-        { "type": "ValidationTextBox", "name": "VRE_Hostname", "caption": "Hostname/IP" },
         { "type": "ValidationTextBox", "name": "Identifier", "caption": "Identifier" },
         { "type": "ValidationTextBox", "name": "TopicPrefix", "caption": "Topic Prefix" }
     ],
