@@ -64,9 +64,19 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             // Benötigt MQTT Server Instanz
             $this->RequireParent("{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}");
 
+            
+
             $topic = $this->ReadPropertyString('TopicPrefix') . '/' . $this->ReadPropertyString('Identifier');
             #$this->SendDebug('topic', $topic, 0);  // Debug: topic
             $this->SetReceiveDataFilter('.*' . $topic . '.*');
+
+
+            //$ip = gethostbyname('<IP-Adresse>'); 
+$ip = gethostbyname('<Hostname>'); 
+if (filter_var($ip, FILTER_VALIDATE_IP)) { 
+   echo("$ip is a valid IP address");}  
+else { 
+    echo("$ip is not a valid IP address");}
 
             $HttpApiString = 'http://' . 'bellau-robo001' . '/api/' . 'mqtt_config';
             $MqttConfigJson = file_get_contents($HttpApiString);

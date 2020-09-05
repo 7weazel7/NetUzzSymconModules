@@ -1,10 +1,12 @@
 {
     "elements": [
+        { "type": "ValidationTextBox", "name": "VRE_Hostname", "caption": "Hostname/IP" },
         { "type": "ValidationTextBox", "name": "Identifier", "caption": "Identifier" },
         { "type": "ValidationTextBox", "name": "TopicPrefix", "caption": "Topic Prefix" }
     ],
     "actions": [
-        { "type": "Button", "label": "Read MQTT values", "onClick": "" }
+        { "type": "Button", "label": "Read MQTT values", "onClick": "" },
+        { "type": "TestCenter" }
     ],
     "status": [
 
