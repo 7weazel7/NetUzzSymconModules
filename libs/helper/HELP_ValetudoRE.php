@@ -16,7 +16,7 @@ trait HELP_ValetudoRE
         }
     }
 
-    public function setCommand(int $Value)
+    public function setCommand($Value)
     {   
         $this->SendDebug('setValue', 'Value: ' . $Value, 0);
         switch ($Value) {
