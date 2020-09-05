@@ -194,7 +194,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
         }
 
         public function ReadMQTTValues(string $Hostname){
-            $this->SendDebug(__METHOD__, 'Hostname: ' . $Hostname, 0);
+            $this->SendDebug(__METHOD__, 'Hostname: ' . $Hostnames, 0);
         }
 
         private function createModuleVariableProfile(string $Name) {
