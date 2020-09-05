@@ -26,17 +26,18 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             } else { $this->createModuleVariableProfile("VRE.Commands"); }
             if (IPS_VariableProfileExists("VRE.States")) { IPS_DeleteVariableProfile("VRE.States"); $this->createModuleVariableProfile("VRE.States");
             } else { $this->createModuleVariableProfile("VRE.States"); }
+            if (IPS_VariableProfileExists("VRE.FanSpeeds")) { IPS_DeleteVariableProfile("VRE.FanSpeeds"); $this->createModuleVariableProfile("VRE.FanSpeeds");
+            } else { $this->createModuleVariableProfile("VRE.FanSpeeds"); }
 
             // Anlegen der Variablen
             $this->RegisterVariableInteger('VRE_Commands', $this->Translate('Command'), 'VRE.Commands', 10); 
-            $this->EnableAction('VRE_Commands');
-            
-            
-            #$this->RegisterVariableString('VRE_Error', $this->Translate('Error'), 'VRE.Errors', 20);
+            $this->EnableAction('VRE_Commands'); 
             $this->RegisterVariableInteger('VRE_States', $this->Translate('State'), 'VRE.States', 30);
+            $this->RegisterVariableInteger("VRE_BatteryLevel", $this->Translate("Battery level"), "~Battery.100", 40);
+            $this->RegisterVariableString('VRE_FanSpeeds', $this->Translate('Suction power'), 'VRE.FanSpeeds', 50);
 
-            $this->RegisterVariableInteger("battery_level", $this->Translate("Battery level"), "~Battery.100", 100);
-            $this->RegisterVariableString('fan_speed', $this->Translate('Suction power'), '', 200);
+            #$this->RegisterVariableString('VRE_Error', $this->Translate('Error'), 'VRE.Errors', 20);
+            
             $this->RegisterVariableString('cleanTime', $this->Translate('Total duration of cleanings'), '', 300);
             $this->RegisterVariableFloat('cleanArea', $this->Translate('Total area cleaned'), 'Roborock.Cleanarea', 400);
             $this->RegisterVariableInteger('cleanCount', $this->Translate('Total number of cleanings'), '', 500);
@@ -159,12 +160,30 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 
             if (fnmatch('*state', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
-                #$this->SendDebug('*state Payload', print_r($Buffer, true), 0);
                 if (property_exists($Payload, 'battery_level')) {
-                    $this->SetValue('battery_level', $Payload->battery_level);
+                    $this->SetValue('VRE_BatteryLevel', $Payload->battery_level);
                 }
                 if (property_exists($Payload, 'fan_speed')) {
-                    $this->SetValue('fan_speed', $Payload->fan_speed);
+                    switch ($Payload->fan_speed) {
+                        case 'min':
+                            SetValue($this->GetIDForIdent('VRE_FanSpeeds'), 1);
+                            break;
+                        case 'medium':
+                            SetValue($this->GetIDForIdent('VRE_FanSpeeds'), 2);
+                            break;
+                        case 'high':
+                            SetValue($this->GetIDForIdent('VRE_FanSpeeds'), 3);
+                            break;
+                        case "max":
+                            SetValue($this->GetIDForIdent('VRE_FanSpeeds'), 4);
+                            break;
+                        case "mop":
+                            SetValue($this->GetIDForIdent('VRE_FanSpeeds'), 5);
+                            break;
+                        default:
+                            $this->SendDebug('VRE_Commands', 'Invalid Value: ' . $Payload->fan_speed, 0);
+                            break;
+                    }
                 }
             }
 
@@ -188,7 +207,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                     $Associations[] = [12, $this->Translate('Store Map'), '', -1];
                     $Associations[] = [13, $this->Translate('Get destinations'), '', -1];
                     $Associations[] = [14, $this->Translate('Play sound'), '', -1];
-                    $this->RegisterProfileIntegerEx('VRE.Commands', '', '', '', $Associations);
+                    $this->RegisterProfileIntegerEx('VRE.Commands', 'Execute', '', '', $Associations);
                     break;
                 case 'VRE.States':
                     $Associations = [];
@@ -206,11 +225,21 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                     $Associations[] = [12, $this->Translate('Error'), '', -1];
                     $Associations[] = [17, $this->Translate('Zone cleanup'), '', -1];
                     $Associations[] = [18, $this->Translate('Segment cleanup'), '', -1];
-                    $this->RegisterProfileIntegerEx('VRE.States', '', '', '', $Associations);
+                    $this->RegisterProfileIntegerEx('VRE.States', 'Information', '', '', $Associations);
+                    break;
+                case 'VRE.FanSpeeds':
+                    $Associations = [];
+                    $Associations[] = [1, $this->Translate('Minimum'), '', -1];
+                    $Associations[] = [2, $this->Translate('Medium'), '', -1];
+                    $Associations[] = [3, $this->Translate('High'), '', -1];
+                    $Associations[] = [4, $this->Translate('Maximum'), '', -1];
+                    $Associations[] = [4, $this->Translate('Low level (wipe)'), '', -1];
+                    $this->RegisterProfileIntegerEx('VRE.FanSpeeds', 'Intensity', '', '', $Associations);
                     break;
                 default:
                     $this->SendDebug(__FUNCTION__, 'Invalid Value', 0);
                     break;
-                }
+            }
         }
+        
     }
