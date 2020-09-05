@@ -8,7 +8,7 @@ trait HELP_ValetudoRE
     {
         switch ($Ident) {
             case 'VRE_Commands':
-                $this->setCommand($Value);
+                $this->SetCommand($Value);
                 break;
             default:
                 $this->SendDebug('Request Action', 'No Action defined: ' . $Ident, 0);
@@ -17,49 +17,50 @@ trait HELP_ValetudoRE
     }
 
     public function SetCommand(int $Value)
-    {
+    {   
+        $this->SendDebug(__METHOD__, 'Value: ' . $Value, 0);
         switch ($Value) {
             case 1:
-                $this->publishCommand("command", "start");
+                $this->PublishCommand("command", "start");
                 break;
             case 2:
-                $this->publishCommand("command", "return_to_base");
+                $this->PublishCommand("command", "return_to_base");
                 break;
             case 3:
-                $this->publishCommand("command", "stop");
+                $this->PublishCommand("command", "stop");
                 break;
             case 4:
-                $this->publishCommand("command", "clean_spot");
+                $this->PublishCommand("command", "clean_spot");
                 break;
             case 5:
-                $this->publishCommand("command", "locate");
+                $this->PublishCommand("command", "locate");
                 break;
             case 6:
-                $this->publishCommand("command", "pause");
+                $this->PublishCommand("command", "pause");
                 break;
             case 7:
-                $this->publishCommand("custom_command", '{"command": "go_to"}');
+                $this->PublishCommand("custom_command", '{"command": "go_to"}');
                 break;
             case 8:
-                $this->publishCommand("custom_command", '{"command": "zoned_cleanup"}');
+                $this->PublishCommand("custom_command", '{"command": "zoned_cleanup"}');
                 break;
             case 9:
-                $this->publishCommand("custom_command",'{"command": "segmented_cleanup"}');
+                $this->PublishCommand("custom_command",'{"command": "segmented_cleanup"}');
                 break;
             case 10:
-                $this->publishCommand("custom_command", '{"command": "reset_consumable"}');
+                $this->PublishCommand("custom_command", '{"command": "reset_consumable"}');
                 break;
             case 11:
-                $this->publishCommand("custom_command", '{"command": "load_map"}');
+                $this->PublishCommand("custom_command", '{"command": "load_map"}');
                 break;
             case 12:
-                $this->publishCommand("custom_command", '{"command": "store_map"}');
+                $this->PublishCommand("custom_command", '{"command": "store_map"}');
                 break;
             case 13:
-                $this->publishCommand("custom_command", '{"command": "get_destinations"}');
+                $this->PublishCommand("custom_command", '{"command": "get_destinations"}');
                 break;
             case 14:
-                $this->publishCommand("custom_command", '{"command": "play_sound"}');
+                $this->PublishCommand("custom_command", '{"command": "play_sound"}');
                 break;
             default:
                 $this->SendDebug('VRE_Commands', 'Invalid Value: ' . $Payload->command, 0);
