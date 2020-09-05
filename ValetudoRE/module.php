@@ -65,7 +65,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             $this->RequireParent("{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}");
 
             $topic = $this->ReadPropertyString('TopicPrefix') . '/' . $this->ReadPropertyString('Identifier');
-            $this->SendDebug('topic', $topic, 0);  // Debug: topic
+            #$this->SendDebug('topic', $topic, 0);  // Debug: topic
             $this->SetReceiveDataFilter('.*' . $topic . '.*');
 
         }
@@ -80,7 +80,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 switch ($data->DataID) {
                     case '{7F7632D9-FA40-4F38-8DEA-C83CD4325A32}': // MQTT Server - RX (from Server to Modul)
                         $Buffer = $data;
-                        $this->SendDebug('Buffer', print_r($Buffer, true), 0);  // Debug: Buffer
+                        #$this->SendDebug('Buffer', print_r($Buffer, true), 0);  // Debug: Buffer
                         break;
                     default:
                         $this->SendDebug('Invalid Parent', KL_ERROR, 0);
@@ -88,8 +88,8 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 }
             }
 
-            $this->SendDebug("Buffer->Topic", $Buffer->Topic, 0); // Debug: Buffer->Topic
-            $this->SendDebug("Buffer->Payload", $Buffer->Payload, 0); // Debug: Buffer->Payload
+            #$this->SendDebug("Buffer->Topic", $Buffer->Topic, 0); // Debug: Buffer->Topic
+            #$this->SendDebug("Buffer->Payload", $Buffer->Payload, 0); // Debug: Buffer->Payload
 
             if (fnmatch('*command_status', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
@@ -162,6 +162,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 
             if (fnmatch('*state', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
+                $this->SendDebug("Buffer->Payload", print_r($Payload), true);
                 if (property_exists($Payload, 'battery_level')) {
                     $this->SetValue('VRE_BatteryLevel', $Payload->battery_level);
                 }

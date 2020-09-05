@@ -21,7 +21,7 @@ trait HELP_ValetudoRE
 
     public function SetCommand(int $Value)
     {   
-        $this->SendDebug(__METHOD__, 'Value: ' . $Value, 0);
+        #$this->SendDebug(__METHOD__, 'Value: ' . $Value, 0);
         switch ($Value) {
             case 1:
                 $this->PublishCommand("command", "start");
@@ -66,7 +66,7 @@ trait HELP_ValetudoRE
                 $this->PublishCommand("custom_command", '{"command": "play_sound"}');
                 break;
             default:
-                $this->SendDebug('VRE_Commands', 'Invalid Value: ' . $Payload->command, 0);
+                $this->SendDebug('VRE_Commands', 'Invalid Value: ' . $Value, 0);
                 break;
         }
     }
@@ -91,7 +91,7 @@ trait HELP_ValetudoRE
                 $this->PublishCommand("set_fan_speed", "mop");
                 break;
             default:
-                $this->SendDebug('VRE_FanSpeeds', 'Invalid Value: ' . $Payload->fan_speed, 0);
+                $this->SendDebug('VRE_FanSpeeds', 'Invalid Value: ' . $Value, 0);
                 break;
         }
     }
@@ -107,7 +107,7 @@ trait HELP_ValetudoRE
         $DataJSON = json_encode($Data, JSON_UNESCAPED_SLASHES);
         #$this->SendDebug(__FUNCTION__ . ': Publish Topic', $Data['Topic'], 0);
         #$this->SendDebug(__FUNCTION__ . ': Publish Payload', $Data['Payload'], 0);
-        #$this->SendDebug(__FUNCTION__ . ': DataJSON', $DataJSON, 0);
+        $this->SendDebug(__FUNCTION__ . ': DataJSON', $DataJSON, 0);
         $this->SendDataToParent($DataJSON);
     }
 }
