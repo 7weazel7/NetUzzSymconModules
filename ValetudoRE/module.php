@@ -162,7 +162,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 
             if (fnmatch('*state', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
-                $this->SendDebug("Buffer->Payload", print_r($Payload), true);
+                $this->SendDebug("Buffer->Payload", print_r($Payload->fan_speed), true);
                 if (property_exists($Payload, 'battery_level')) {
                     $this->SetValue('VRE_BatteryLevel', $Payload->battery_level);
                 }
