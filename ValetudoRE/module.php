@@ -73,10 +73,10 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             $this->SendDebug('HttpApiString', $HttpApiString, 0);
             $this->SendDebug('MqttConfigJson', $MqttConfigJson, 0);
             $MqttConfigJsonDecoded = json_decode($JSONString); // Decode: JSONString
-            $MqttIdentifier = $MqttConfigJsonDecoded->identifier;
-            $MqttTopicPrefix = $MqttConfigJsonDecoded->valetudo;
-            $this->SendDebug('MqttIdentifier', $MqttIdentifier, 0);
-            $this->SendDebug('MqttTopicPrefix', $MqttTopicPrefix, 0);
+            #$MqttIdentifier = $MqttConfigJsonDecoded->identifier;
+            #$MqttTopicPrefix = $MqttConfigJsonDecoded->valetudo;
+            #$this->SendDebug('MqttIdentifier', $MqttIdentifier, 0);
+            $this->SendDebug('MqttTopicPrefix',print_r($MqttConfigJsonDecoded), true);
 
         }
  
