@@ -76,19 +76,19 @@ trait HELP_ValetudoRE
         $this->SendDebug(__METHOD__, 'Value: ' . $Value, 0);
         switch ($Value) {
             case 1:
-                $this->PublishCommand("set_fan_speed", '{"command": "min"}');
+                $this->PublishCommand("set_fan_speed", "min");
                 break;
             case 2:
-                $this->PublishCommand("set_fan_speed", '{"command": "medium"}');
+                $this->PublishCommand("set_fan_speed", "medium");
                 break;
             case 3:
-                $this->PublishCommand("set_fan_speed", '{"command": "high"}');
+                $this->PublishCommand("set_fan_speed", "high");
                 break;
             case 4:
-                $this->PublishCommand("set_fan_speed", '{"command": "max"}');
+                $this->PublishCommand("set_fan_speed", "max");
                 break;
             case 5:
-                $this->PublishCommand("set_fan_speed", '{"command": "mop"}');
+                $this->PublishCommand("set_fan_speed", "mop");
                 break;
             default:
                 $this->SendDebug('VRE_FanSpeeds', 'Invalid Value: ' . $Value, 0);

@@ -136,6 +136,8 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                     case "play_sound":
                         SetValue($this->GetIDForIdent('VRE_Commands'), 14);
                         break;
+                    case "set_fan_speed":
+                        break;
                     default:
                         $this->SendDebug('VRE_Commands', 'Invalid Value: ' . $Payload->command, 0);
                         break;
