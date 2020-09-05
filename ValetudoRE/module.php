@@ -69,10 +69,14 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             $this->SetReceiveDataFilter('.*' . $topic . '.*');
 
             $HttpApiString = 'http://' . 'bellau-robo001' . '/api/' . 'mqtt_config';
-            #$MqttConfigJson = file_get_contents('http://bellau-robo001/api/mqtt_config');
-            $this->SendDebug('json', $HttpApiString, 0);
-
-
+            $MqttConfigJson = file_get_contents($HttpApiString);
+            $this->SendDebug('HttpApiString', $HttpApiString, 0);
+            $this->SendDebug('MqttConfigJson', $MqttConfigJson, 0);
+            $MqttConfigJsonDecoded = json_decode($JSONString); // Decode: JSONString
+            $MqttIdentifier = $MqttConfigJsonDecoded->identifier;
+            $MqttTopicPrefix = $MqttConfigJsonDecoded->valetudo;
+            $this->SendDebug('MqttIdentifier', $MqttIdentifier, 0);
+            $this->SendDebug('MqttTopicPrefix', $MqttTopicPrefix, 0);
 
         }
  
