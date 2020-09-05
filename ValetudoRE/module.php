@@ -162,8 +162,6 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 */
             }
             
-            $this->SetValue('VRE_FanSpeeds', $this->ReadPropertyInteger('VRE_FanSpeeds'));
-
             if (fnmatch('*state', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
                 if (property_exists($Payload, 'battery_level')) {
