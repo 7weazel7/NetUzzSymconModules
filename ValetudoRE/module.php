@@ -64,7 +64,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             $this->RequireParent("{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}");
 
             $topic = $this->ReadPropertyString('TopicPrefix') . '/' . $this->ReadPropertyString('Identifier');
-            #$this->SendDebug('topic', $topic, 0);  // Debug: topic
+            $this->SendDebug('topic', $topic, 0);  // Debug: topic
             $this->SetReceiveDataFilter('.*' . $topic . '.*');
 
         }
