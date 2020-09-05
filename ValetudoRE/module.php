@@ -143,13 +143,13 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
 
             if (fnmatch('*attributes', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
-                $this->SendDebug('*attributes Payload', print_r($Payload, true), 0);
                 #$this->SendDebug('*attributes Payload', print_r($Payload, true), 0);
-                #if (property_exists($Payload, 'valetudo_state')) {
+                if (property_exists($Payload, 'valetudo_state')) {
+                    $this->SendDebug('*attributes Payload', print_r($Payload, true), 0);
                     #$ValetudoState = json_decode($Payload->valetudo_state);
                     #$this->SendDebug('ValetudoState', 'id: ' . $ValetudoState->id, 0);
                     #$this->SetValue('VRE_State', $ValetudoState->id);
-                #}
+                }
                 /*
                 if (property_exists($Payload, 'cleanTime')) {
                     $this->SetValue('cleanTime', $Payload->cleanTime);
@@ -165,7 +165,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 
             if (fnmatch('*state', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
-                $this->SendDebug('*state Payload', print_r($Buffer, true), 0);
+                #$this->SendDebug('*state Payload', print_r($Buffer, true), 0);
                 if (property_exists($Payload, 'battery_level')) {
                     $this->SetValue('battery_level', $Payload->battery_level);
                 }
