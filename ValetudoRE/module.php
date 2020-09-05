@@ -162,7 +162,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 */
             }
             
-            SetValue($this->GetIDForIdent('VRE_FanSpeeds'), $this->ReadPropertyInteger('VRE_FanSpeeds'));
+            $this->SetValue('VRE_FanSpeeds', $this->ReadPropertyInteger('VRE_FanSpeeds'));
 
             if (fnmatch('*state', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
