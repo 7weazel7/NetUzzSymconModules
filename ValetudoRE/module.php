@@ -184,7 +184,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                             SetValue($this->GetIDForIdent('VRE_FanSpeeds'), 5);
                             break;
                         default:
-                            $this->SendDebug('VRE_Commands', 'Invalid Value: ' . $Payload->fan_speed, 0);
+                            $this->SendDebug('VRE_FanSpeeds', 'Invalid Value: ' . $Payload->fan_speed, 0);
                             break;
                     }
                 }
