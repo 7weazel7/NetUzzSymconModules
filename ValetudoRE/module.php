@@ -70,13 +70,13 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             #$this->SendDebug('topic', $topic, 0);  // Debug: topic
             $this->SetReceiveDataFilter('.*' . $topic . '.*');
 
-
+            /*
             //$ip = gethostbyname('<IP-Adresse>'); 
-$ip = gethostbyname('<Hostname>'); 
-if (filter_var($ip, FILTER_VALIDATE_IP)) { 
-   echo("$ip is a valid IP address");}  
-else { 
-    echo("$ip is not a valid IP address");}
+            $ip = gethostbyname('<Hostname>');
+            if (filter_var($ip, FILTER_VALIDATE_IP)) { 
+            echo("$ip is a valid IP address");}  
+            else { 
+            echo("$ip is not a valid IP address");} */
 
             $HttpApiString = 'http://' . 'bellau-robo001' . '/api/' . 'mqtt_config';
             $MqttConfigJson = file_get_contents($HttpApiString);
