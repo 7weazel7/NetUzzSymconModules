@@ -5,8 +5,7 @@
         { "type": "ValidationTextBox", "name": "TopicPrefix", "caption": "Topic Prefix" }
     ],
     "actions": [
-        { "type": "Button", "label": "Read MQTT values", "onClick": "" },
-        { "type": "TestCenter" }
+        { "type": "TestCenter", "name": "Test center" }
     ],
     "status": [
 
