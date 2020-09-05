@@ -74,7 +74,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             $this->SendDebug('MqttConfigJson', $MqttConfigJson, 0);
             $MqttConfigJsonDecoded = json_decode($MqttConfigJson); // Decode: JSONString
             $MqttIdentifier = $MqttConfigJsonDecoded->identifier;
-            $MqttTopicPrefix = $MqttConfigJsonDecoded->valetudo;
+            $MqttTopicPrefix = $MqttConfigJsonDecoded->topicPrefix;
             $this->SendDebug('MqttIdentifier', $MqttIdentifier, 0);
             $this->SendDebug('MqttTopicPrefix', $MqttTopicPrefix, 0);
 
