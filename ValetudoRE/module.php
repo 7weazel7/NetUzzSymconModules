@@ -68,9 +68,10 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             #$this->SendDebug('topic', $topic, 0);  // Debug: topic
             $this->SetReceiveDataFilter('.*' . $topic . '.*');
 
+            $HttpApiString = 'http://' . 'bellau-robo001' . '/api/' . 'mqtt_config';
+            #$MqttConfigJson = file_get_contents('http://bellau-robo001/api/mqtt_config');
+            $this->SendDebug('json', $HttpApiString, 0);
 
-            $json = file_get_contents('http://bellau-robo001/api/mqtt_config');
-            $this->SendDebug('json', $json, 0);
 
 
         }
