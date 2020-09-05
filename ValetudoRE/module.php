@@ -164,7 +164,6 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 
             if (fnmatch('*state', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
-                $this->SendDebug("Buffer->Payload", print_r($Payload->fan_speed), true);
                 if (property_exists($Payload, 'battery_level')) {
                     $this->SetValue('VRE_BatteryLevel', $Payload->battery_level);
                 }
@@ -172,18 +171,23 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                     switch ($Payload->fan_speed) {
                         case 'min':
                             SetValue($this->GetIDForIdent('VRE_FanSpeeds'), 1);
+                            $this->SetValue('VRE_FanSpeeds', 1);
                             break;
                         case 'medium':
                             SetValue($this->GetIDForIdent('VRE_FanSpeeds'), 2);
+                            $this->SetValue('VRE_FanSpeeds', 2);
                             break;
                         case 'high':
                             SetValue($this->GetIDForIdent('VRE_FanSpeeds'), 3);
+                            $this->SetValue('VRE_FanSpeeds', 3);
                             break;
                         case "max":
                             SetValue($this->GetIDForIdent('VRE_FanSpeeds'), 4);
+                            $this->SetValue('VRE_FanSpeeds', 4);
                             break;
                         case "mop":
                             SetValue($this->GetIDForIdent('VRE_FanSpeeds'), 5);
+                            $this->SetValue('VRE_FanSpeeds', 5);
                             break;
                         default:
                             $this->SendDebug('VRE_FanSpeeds', 'Invalid Value: ' . $Payload->fan_speed, 0);
