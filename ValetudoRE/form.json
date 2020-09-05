@@ -3,6 +3,10 @@
         { "type": "ValidationTextBox", "name": "Identifier", "caption": "Identifier" },
         { "type": "ValidationTextBox", "name": "TopicPrefix", "caption": "Topic Prefix" }
     ],
-    "actions": [],
-    "status": []
+    "actions": [
+        { "type": "Button", "label": "Read MQTT values", "onClick": "ReadMQTTValues('BELLAU-SROBO001');" }
+    ],
+    "status": [
+
+    ]
 }
