@@ -34,7 +34,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             $this->EnableAction('VRE_Commands'); 
             $this->RegisterVariableInteger('VRE_States', $this->Translate('State'), 'VRE.States', 30);
             $this->RegisterVariableInteger("VRE_BatteryLevel", $this->Translate("Battery level"), "~Battery.100", 40);
-            $this->RegisterVariableString('VRE_FanSpeeds', $this->Translate('Suction power'), 'VRE.FanSpeeds', 50);
+            $this->RegisterVariableInteger('VRE_FanSpeeds', $this->Translate('Suction power'), 'VRE.FanSpeeds', 50);
 
             #$this->RegisterVariableString('VRE_Error', $this->Translate('Error'), 'VRE.Errors', 20);
             
