@@ -143,12 +143,13 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
 
             if (fnmatch('*attributes', $Buffer->Topic)) {
                 $Payload = json_decode($Buffer->Payload);
-                $this->SendDebug('Payload', print_r($Payload), 0);
+                #$this->SendDebug('Payload', print_r($Payload), 0);
                 #if (property_exists($Payload, 'valetudo_state')) {
                     #$ValetudoState = json_decode($Payload->valetudo_state);
                     #$this->SendDebug('ValetudoState', 'id: ' . $ValetudoState->id, 0);
                     #$this->SetValue('VRE_State', $ValetudoState->id);
                 #}
+                /*
                 if (property_exists($Payload, 'cleanTime')) {
                     $this->SetValue('cleanTime', $Payload->cleanTime);
                 }
@@ -158,6 +159,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 if (property_exists($Payload, 'cleanCount')) {
                     $this->SetValue('cleanCount', $Payload->cleanCount);
                 }
+                */
             }
                 
             if (fnmatch('*state', $Buffer->Topic)) {
