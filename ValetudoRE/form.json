@@ -1,7 +1,6 @@
 {
     "elements": [
-        { "type": "ValidationTextBox", "name": "Identifier", "caption": "Identifier" },
-        { "type": "ValidationTextBox", "name": "TopicPrefix", "caption": "Topic Prefix" }
+        { "type": "ValidationTextBox", "name": "VRE_Hostname", "caption": "Hostname" }
     ],
     "actions": [
         { "type": "TestCenter", "name": "Test center" }

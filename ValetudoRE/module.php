@@ -21,7 +21,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             $this->ConnectParent("{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}");
 
             // Eigenschaften für Identifier und TopicPrefix registrieren
-            $this->RegisterPropertyString("Hostname", "");
+            $this->RegisterPropertyString("VRE_Hostname", "");
             #$this->RegisterPropertyString("Identifier", "rockrobo");
             #$this->RegisterPropertyString("TopicPrefix", "valetudo");
 
