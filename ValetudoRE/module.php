@@ -83,7 +83,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                 $this->SendDebug('FullTopic', $FullTopic, 0);  // Debug: FullTopic
                 $this->SetReceiveDataFilter('.*' . $FullTopic . '.*');
             } else { 
-                echo("$ip is not a valid IP address");
+                echo("$IpAddress is not a valid IP address");
             }
 
             #$topic = $this->ReadPropertyString('TopicPrefix') . '/' . $this->ReadPropertyString('Identifier');
