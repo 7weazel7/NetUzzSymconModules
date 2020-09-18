@@ -20,10 +20,8 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                RX (vom Server zum Modul) {7F7632D9-FA40-4F38-8DEA-C83CD4325A32} */
             $this->ConnectParent("{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}");
 
-            // Eigenschaften für Identifier und TopicPrefix registrieren
+            // Eigenschaften registrieren
             $this->RegisterPropertyString("VRE_Hostname", "");
-            #$this->RegisterPropertyString("Identifier", "rockrobo");
-            #$this->RegisterPropertyString("TopicPrefix", "valetudo");
 
             // Prüfen ob Variablenprofile vorhanden und diese ggf. neu anlegen
             if (IPS_VariableProfileExists("VRE.Commands")) { IPS_DeleteVariableProfile("VRE.Commands"); $this->createModuleVariableProfile("VRE.Commands");
@@ -72,15 +70,15 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             if (filter_var($IpAddress, FILTER_VALIDATE_IP)) {     
                 $HttpApiString = 'http://' . $IpAddress . '/api/' . 'mqtt_config';
                 $MqttConfigJson = file_get_contents($HttpApiString);
-                $this->SendDebug('HttpApiString', $HttpApiString, 0);
-                $this->SendDebug('MqttConfigJson', $MqttConfigJson, 0);
+                #$this->SendDebug('HttpApiString', $HttpApiString, 0);
+                #$this->SendDebug('MqttConfigJson', $MqttConfigJson, 0);
                 $MqttConfigJsonDecoded = json_decode($MqttConfigJson); // Decode: JSONString
                 $MqttIdentifier = $MqttConfigJsonDecoded->identifier;
                 $MqttTopicPrefix = $MqttConfigJsonDecoded->topicPrefix;
-                $this->SendDebug('MqttIdentifier', $MqttIdentifier, 0);
-                $this->SendDebug('MqttTopicPrefix', $MqttTopicPrefix, 0);
+                #$this->SendDebug('MqttIdentifier', $MqttIdentifier, 0);
+                #$this->SendDebug('MqttTopicPrefix', $MqttTopicPrefix, 0);
                 $FullTopic = $MqttTopicPrefix . '/' . $MqttIdentifier;
-                $this->SendDebug('FullTopic', $FullTopic, 0);  // Debug: FullTopic
+                #$this->SendDebug('FullTopic', $FullTopic, 0);  // Debug: FullTopic
                 $this->SetReceiveDataFilter('.*' . $FullTopic . '.*');
             } else { 
                 echo("$IpAddress is not a valid IP address");
@@ -94,7 +92,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
  
         public function ReceiveData($JSONString)
         {   
-            if (!empty($this->ReadPropertyString('Identifier'))) {             
+            if (filter_var($IpAddress, FILTER_VALIDATE_IP)) {             
 
                 #$this->SendDebug("JSONString", $JSONString, 0); // Debug: JSONString
                 $data = json_decode($JSONString); // Decode: JSONString
