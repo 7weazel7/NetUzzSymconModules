@@ -14,12 +14,16 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
         public function Create() {
             // Diese Zeile nicht löschen.
             parent::Create();
-            // Verbinde zur MQTT Server Instanz
+            
+            /* Verbinde zur GUID vom MQTT Server (Splitter)
+               TX (vom Modul zum Server) {043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}
+               RX (vom Server zum Modul) {7F7632D9-FA40-4F38-8DEA-C83CD4325A32} */
             $this->ConnectParent("{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}");
 
             // Eigenschaften für Identifier und TopicPrefix registrieren
-            $this->RegisterPropertyString("Identifier", "rockrobo");
-            $this->RegisterPropertyString("TopicPrefix", "valetudo");
+            $this->RegisterPropertyString("Hostname", "");
+            #$this->RegisterPropertyString("Identifier", "rockrobo");
+            #$this->RegisterPropertyString("TopicPrefix", "valetudo");
 
             // Prüfen ob Variablenprofile vorhanden und diese ggf. neu anlegen
             if (IPS_VariableProfileExists("VRE.Commands")) { IPS_DeleteVariableProfile("VRE.Commands"); $this->createModuleVariableProfile("VRE.Commands");
@@ -37,8 +41,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             $this->RegisterVariableInteger('VRE_FanSpeeds', $this->Translate('Suction power'), 'VRE.FanSpeeds', 50);
             $this->EnableAction('VRE_FanSpeeds'); 
 
-            #$this->RegisterVariableString('VRE_Error', $this->Translate('Error'), 'VRE.Errors', 20);
-            
+            #$this->RegisterVariableString('VRE_Error', $this->Translate('Error'), 'VRE.Errors', 20);   
             #$this->RegisterVariableString('cleanTime', $this->Translate('Total duration of cleanings'), '', 300);
             #$this->RegisterVariableFloat('cleanArea', $this->Translate('Total area cleaned'), 'Roborock.Cleanarea', 400);
             #$this->RegisterVariableInteger('cleanCount', $this->Translate('Total number of cleanings'), '', 500);
@@ -64,29 +67,28 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             // Benötigt MQTT Server Instanz
             $this->RequireParent("{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}");
 
-            
+            // Auslesen der MQTT Config
+            $IpAddress = $this->ReadPropertyString('Hostname');
+            if (filter_var($IpAddress, FILTER_VALIDATE_IP)) {     
+                $HttpApiString = 'http://' . $IpAddress . '/api/' . 'mqtt_config';
+                $MqttConfigJson = file_get_contents($HttpApiString);
+                $this->SendDebug('HttpApiString', $HttpApiString, 0);
+                $this->SendDebug('MqttConfigJson', $MqttConfigJson, 0);
+                $MqttConfigJsonDecoded = json_decode($MqttConfigJson); // Decode: JSONString
+                $MqttIdentifier = $MqttConfigJsonDecoded->identifier;
+                $MqttTopicPrefix = $MqttConfigJsonDecoded->topicPrefix;
+                $this->SendDebug('MqttIdentifier', $MqttIdentifier, 0);
+                $this->SendDebug('MqttTopicPrefix', $MqttTopicPrefix, 0);
+                $FullTopic = $MqttTopicPrefix . '/' . $MqttIdentifier;
+                $this->SendDebug('FullTopic', $FullTopic, 0);  // Debug: FullTopic
+                $this->SetReceiveDataFilter('.*' . $FullTopic . '.*');
+            } else { 
+                echo("$ip is not a valid IP address");
+            }
 
-            $topic = $this->ReadPropertyString('TopicPrefix') . '/' . $this->ReadPropertyString('Identifier');
+            #$topic = $this->ReadPropertyString('TopicPrefix') . '/' . $this->ReadPropertyString('Identifier');
             #$this->SendDebug('topic', $topic, 0);  // Debug: topic
-            $this->SetReceiveDataFilter('.*' . $topic . '.*');
-
-            /*
-            //$ip = gethostbyname('<IP-Adresse>'); 
-            $ip = gethostbyname('<Hostname>');
-            if (filter_var($ip, FILTER_VALIDATE_IP)) { 
-            echo("$ip is a valid IP address");}  
-            else { 
-            echo("$ip is not a valid IP address");} */
-
-            $HttpApiString = 'http://' . 'bellau-robo001' . '/api/' . 'mqtt_config';
-            $MqttConfigJson = file_get_contents($HttpApiString);
-            $this->SendDebug('HttpApiString', $HttpApiString, 0);
-            $this->SendDebug('MqttConfigJson', $MqttConfigJson, 0);
-            $MqttConfigJsonDecoded = json_decode($MqttConfigJson); // Decode: JSONString
-            $MqttIdentifier = $MqttConfigJsonDecoded->identifier;
-            $MqttTopicPrefix = $MqttConfigJsonDecoded->topicPrefix;
-            $this->SendDebug('MqttIdentifier', $MqttIdentifier, 0);
-            $this->SendDebug('MqttTopicPrefix', $MqttTopicPrefix, 0);
+            #$this->SetReceiveDataFilter('.*' . $topic . '.*');
 
         }
  
@@ -210,7 +212,6 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                     }
                 }
             }
-
         }
 
         public function ReadMQTTValues(string $Hostname){
@@ -268,6 +269,5 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
                     $this->SendDebug(__FUNCTION__, 'Invalid Value', 0);
                     break;
             }
-        }
-        
+        }  
     }
