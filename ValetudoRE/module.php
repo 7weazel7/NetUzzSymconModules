@@ -68,7 +68,7 @@ require_once __DIR__ . '/../libs/helper/HELP_ValetudoRE.php';
             $this->RequireParent("{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}");
 
             // Auslesen der MQTT Config
-            $IpAddress = $this->ReadPropertyString('Hostname');
+            $IpAddress = $this->ReadPropertyString('VRE_Hostname');
             if (filter_var($IpAddress, FILTER_VALIDATE_IP)) {     
                 $HttpApiString = 'http://' . $IpAddress . '/api/' . 'mqtt_config';
                 $MqttConfigJson = file_get_contents($HttpApiString);
