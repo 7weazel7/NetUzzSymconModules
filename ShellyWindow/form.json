@@ -1,0 +1,25 @@
+{
+    "elements":
+    [
+      { "type": "ValidationTextBox", "name": "MQTTTopic", "caption": "MQTT Topic" },
+      { "type": "Select", "name": "Device", "caption": "Device",
+        "options": [
+          { "caption": "Please select device", "value": "" },
+          { "caption": "Shelly DW", "value": "DW" },
+          { "caption": "Shelly DW2", "value": "DW2" }
+        ]
+      },
+      { "type": "CheckBox", "name": "CB_Shelly_Reachable", "caption": "Reachable", "value": true },
+      { "type": "CheckBox", "name": "CB_Shelly_State", "caption": "State", "value": true },
+      { "type": "CheckBox", "name": "CB_Shelly_Lux", "caption": "Lux", "value": true },
+      { "type": "CheckBox", "name": "CB_Shelly_Battery", "caption": "Battery", "value": true },
+      { "type": "CheckBox", "name": "CB_Shelly_Temperature", "caption": "Temperature", "value": true },
+      { "type": "CheckBox", "name": "CB_Shelly_Vibration", "caption": "Vibration", "value": true },
+      { "type": "CheckBox", "name": "CB_Shelly_Tilt", "caption": "Tilt", "value": true }
+    ],
+    "actions": [
+        {
+            "type": "TestCenter"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "elements":
+    [
+      { "type": "ValidationTextBox", "name": "MQTTTopic", "caption": "MQTT Topic" },
+      { "type": "CheckBox", "name": "CB_Shelly_Battery", "caption": "Battery", "value": true },
+      { "type": "CheckBox", "name": "CB_Shelly_Reachable", "caption": "Reachable", "value": true }
+    ],
+    "actions": [
+        {
+            "type": "TestCenter"
+        }
+    ]
+}

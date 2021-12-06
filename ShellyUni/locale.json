@@ -1,0 +1,19 @@
+{
+  "translations": {
+    "de": {
+      "ADC 1": "ADC 1",
+      "External Humidity 1": "External Humidity 1",
+      "External Humidity 2": "External Humidity 2",
+      "External Humidity 3": "External Humidity 3",
+      "External Temperature 1": "Externe Temperatur 1",
+      "External Temperature 2": "Externe Temperatur 2",
+      "External Temperature 3": "Externe Temperatur 3",
+      "Input 1": "Eingang 1",
+      "Input 2": "Eingang 2",
+      "Reachable": "Erreichbar",
+      "State 1": "Status 1",
+      "State 2": "Status 2",
+      "Variable profile type does not match for profile": "Der Profiltyp der Variablen stimmt nicht mit dem Profil überein"
+    }
+  }
+}
