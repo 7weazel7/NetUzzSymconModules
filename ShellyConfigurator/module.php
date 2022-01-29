@@ -428,6 +428,18 @@ class ShellyConfigurator extends IPSModule
                                 ]
                             ];
                             break;
+                        case 'shellytrv':
+                            $moduleID = '{FEBA9798-EB8E-4703-A9BC-C1B3EE711D1B}';
+                            $DeviceType = 'Shelly TRV';
+                            $AddValue['create'] = [
+                                [
+                                    'moduleID'      => $moduleID,
+                                    'configuration' => [
+                                        'MQTTTopic' => $Shelly['Name']
+                                    ]
+                                ]
+                            ];
+                            break;
                     default:
                         $this->SendDebug(__FUNCTION__ . ' DeviceType Switch', 'Invalid Device Type:' . strtolower($Shelly['DeviceType']), 0);
                         $DeviceType = 'Invalid';
@@ -519,6 +531,9 @@ class ShellyConfigurator extends IPSModule
         //Shelly Pro 4PM
         $InstanceIDs[] = IPS_GetInstanceListByModuleID('{4E416C32-833A-4469-97B3-D4A41413A272}');
 
+        //Shelly TRV
+        $InstanceIDs[] = IPS_GetInstanceListByModuleID('{FEBA9798-EB8E-4703-A9BC-C1B3EE711D1B}');
+
         foreach ($InstanceIDs as $IDs) {
             foreach ($IDs as $id) {
                 if (strtolower(IPS_GetProperty($id, 'MQTTTopic')) == strtolower($ShellyID)) {
@@ -545,17 +560,33 @@ class ShellyConfigurator extends IPSModule
 
                 $type = strstr($device['Name'], '-', true);
                 $shelly['Name'] = $device['Name'];
-                $shelly['IPv4'] = $deviceInfo[0]['IPv4'][0];
+                if (array_key_exists(0, $deviceInfo)) {
+                    if (array_key_exists(0, $deviceInfo[0]['IPv4'])) {
+                        //$this->LogMessage(print_r($deviceInfo, true), KL_NOTIFY);
+                        $shelly['IPv4'] = $deviceInfo[0]['IPv4'][0];
+                    } else {
+                        $shelly['IPv4'] = '-';
+                    }
+                } else {
+                    $shelly['IPv4'] = '-';
+                }
                 if ($type != 'shellysense') {
                     $shelly['DeviceType'] = strstr($device['Name'], '-', true);
                     $shelly['Firmware'] = '-';
-                    $this->SendDebug('mDNS TXTRecords', print_r($deviceInfo[0]['TXTRecords'], true), 0);
-                    if (array_key_exists(1, $deviceInfo[0]['TXTRecords'])) {
-                        $shelly['Firmware'] = $deviceInfo[0]['TXTRecords'][1];
+                    $this->SendDebug('mDNS TXTRecords', print_r($deviceInfo, true), 0);
+                    if (array_key_exists(0, $deviceInfo)) {
+                        if (is_array($deviceInfo[0])) {
+                            if (array_key_exists(1, $deviceInfo[0]['TXTRecords'])) {
+                                $shelly['Firmware'] = $deviceInfo[0]['TXTRecords'][1];
+                            } else {
+                                $shelly['Firmware'] = '-';
+                            }
+                        } else {
+                            $shelly['Firmware'] = '-';
+                        }
+                    } else {
+                        $shelly['Firmware'] = '-';
                     }
-                } else {
-                    $shelly['DeviceType'] = '-';
-                    $shelly['Firmware'] = '-';
                 }
                 $shellys[] = $shelly;
             }
